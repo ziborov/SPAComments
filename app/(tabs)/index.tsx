@@ -6,6 +6,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useEffect } from "react/index";
 import * as SQLite from 'expo-sqlite';
+import { openDatabase } from "@/components/DatabaseHelper";
 
 
 export default function HomeScreen() {
@@ -14,7 +15,7 @@ export default function HomeScreen() {
 
         console.log(`Start App!`);
 
-
+        //openDatabase(`@/db/SPAComments.sqlite`).then(r => console.log(`Database opened`));
 
     });
 
