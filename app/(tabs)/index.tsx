@@ -2,12 +2,22 @@ import {Image, StyleSheet, Platform} from 'react-native';
 
 import {HelloWave} from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import {ThemedText} from '@/components/ThemedText';
-import {ThemedView} from '@/components/ThemedView';
-import {InitDBTable} from '@/components/DatabaseHelper';
+import { ThemedText } from '@/components/ThemedText';
+import { ThemedView } from '@/components/ThemedView';
+import { useEffect } from "react/index";
+import * as SQLite from 'expo-sqlite';
 
 
 export default function HomeScreen() {
+
+    useEffect(() => {
+
+        console.log(`Start App!`);
+
+
+
+    });
+
 
     return (
         <ParallaxScrollView
