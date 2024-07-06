@@ -12,6 +12,8 @@ export class DatabaseHelper {
 
     private SQLLiteStep: any;
 
+    private db: any;
+
     constructor (SPADatabaseName, SQLLiteStep) {
 
         this.SPADatabaseName = SPADatabaseName;
@@ -19,6 +21,8 @@ export class DatabaseHelper {
         this.SQLLiteStep = SQLLiteStep;
 
     }
+
+
 
 
 
