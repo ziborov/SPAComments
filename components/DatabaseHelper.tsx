@@ -6,16 +6,21 @@ import { Asset } from 'expo-asset';
 
 import { DATABASE_NAME } from '@/constants/DatabaseConst';
 
+export class DatabaseHelper {
 
+    private SPADatabaseName: any;
 
-export async function openDatabase(pathToDatabaseFile: string): Promise<SQLite.WebSQLDatabase> {
-    if (!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + 'SQLite')).exists) {
-        await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'SQLite');
+    private SQLLiteStep: any;
+
+    constructor (SPADatabaseName, SQLLiteStep) {
+
+        this.SPADatabaseName = SPADatabaseName;
+
+        this.SQLLiteStep = SQLLiteStep;
+
     }
-    const asset = await Asset.fromModule(require(pathToDatabaseFile)).downloadAsync();
-    // await FileSystem.copyAsync({
-    //     from: asset.localUri,
-    //     to: FileSystem.documentDirectory + 'SQLite/myDatabaseName.db',
-    // });
-    return SQLite.openDatabase('myDatabaseName.db');
+
+
+
+
 }
