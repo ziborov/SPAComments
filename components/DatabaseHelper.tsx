@@ -8,21 +8,21 @@ import { DATABASE_NAME } from '@/constants/DatabaseConst';
 
 export class DatabaseHelper {
 
-    private SPADatabaseName: any;
+    private SPADatabaseName: string = "";
 
-    private openDatabaseStep: any;
+    private openDatabaseStep: number = 0;
 
-    private db: any;
+    private db: any = null;
 
-    private dbStep: any;
+    private dbStep: number = 0;
 
-    private dbDir: any;
+    private dbDir: string = "";
 
-    constructor (SPADatabaseName, openDatabaseStep) {
+    constructor (SPADatabaseName) {
 
         this.SPADatabaseName = SPADatabaseName;
 
-        this.openDatabaseStep = openDatabaseStep;
+        this.openDatabaseStep = 0;
 
     }
 
@@ -36,7 +36,7 @@ export class DatabaseHelper {
 
     async createDir () {
 
-        console.log(`Db directory doesn't exist, creating…`);
+        console.log(`Db directory doesn't exist, ${this.dbDir} creating… `);
 
         await FileSystem.makeDirectoryAsync(this.dbDir, { intermediates: true });
 
@@ -62,9 +62,11 @@ export class DatabaseHelper {
 
                     if (!dirInfo.exists) {
 
-                        console.log("Gif directory doesn't exist, creating…");
+                        this.createDir().then(r => console.log(`Create dir result ${r}`));
 
-                        this.createDir().then(r => console.log(`create db dir result ${r}`));
+                    } else {
+
+                        this.dbStep = 1;
 
                     }
 

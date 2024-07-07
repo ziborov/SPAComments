@@ -7,11 +7,17 @@ import { ThemedView } from '@/components/ThemedView';
 import { useEffect } from "react/index";
 import * as SQLite from 'expo-sqlite';
 import { DatabaseHelper } from "@/components/DatabaseHelper";
-let db = null;
-let dbStep, dbPreviousStep = 0;
 
 
 export default function HomeScreen() {
+
+    let db: any = null;
+
+    let dbStep : number = 0;
+
+    let dbPreviousStep : number = 0;
+
+    const dbName: string = `spa_comments`;
 
     useEffect(() => {
 
@@ -23,9 +29,15 @@ export default function HomeScreen() {
 
             console.log(`dbStep: ${dbStep}`);
 
-        }, 500);
+            if(dbStep !== dbPreviousStep) {
 
-        const databaseHelper = new DatabaseHelper("SPAComments", dbStep);
+                dbPreviousStep = dbStep;
+
+            }
+
+        }, 1000);
+
+        const databaseHelper = new DatabaseHelper(dbName);
 
         //db = openDatabase
 
