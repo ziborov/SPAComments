@@ -133,5 +133,4 @@ INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUE
 
     }
 
-
 }
