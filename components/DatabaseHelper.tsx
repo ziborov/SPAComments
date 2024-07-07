@@ -50,8 +50,22 @@ export class DatabaseHelper {
 
     async createSQLLite(sqlLiteName) {
 
-        //const db = await SQLite.openDatabaseAsync(sqlLiteName);
-        const db = await SQLite.openDatabaseAsync("sqlLiteName");
+        const db = await SQLite.openDatabaseAsync(sqlLiteName);
+
+        console.log(`db isPromise ${util.types.isPromise(db)}`);
+
+        await db.execAsync(`
+PRAGMA journal_mode = WAL;
+CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY NOT NULL, avatar TEXT NOT NULL, user_name TEXT NOT NULL,  email TEXT NOT NULL,  home_page TEXT NOT NULL,  captcha TEXT NOT NULL,  text TEXT NOT NULL);
+INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUES (0, 'SPA01.png', 'Rum_8', 'Rum_8@gmail.com', 'https://www.linkedin.com/in/oleksandr-ziborov-10589192/', '12345', 'Everybody of us understood clear things: Eliminating external contradictions provides ample opportunities!' );
+INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUES (1, 'SPA02.png', 'Anonym', 'Anonym@gmail.com', 'https://www.linkedin.com/in/oleksandr-ziborov-10589192/', '67890', 'Suddenly, careful research of competitors, which represent a clear example of the continental European type of political culture, will be associatively distributed across industries.' );
+
+`);
+
+        const firstRow = await db.getFirstAsync('SELECT * FROM users');
+
+        console.log(`id: ${firstRow.id}, avatar: ${firstRow.avatar}, user_name: ${firstRow.user_name}`);
+
 
         return db;
 
@@ -60,7 +74,8 @@ export class DatabaseHelper {
     async dbUsersCreated(dbTable) {
 
         const dbTableCreate = await dbTable.execAsync(`
-CREATE TABLE "users" ( "id" INTEGER, "avatar" TEXT, "email" TEXT, "home_page" TEXT, "captcha" TEXT, "text" TEXT, PRIMARY KEY("id" AUTOINCREMENT) )
+CREATE TABLE users ( "id" INTEGER, "avatar" TEXT, "email" TEXT, "home_page" TEXT, "captcha" TEXT, "text" TEXT, PRIMARY KEY("id" AUTOINCREMENT) );
+INSERT INTO users (value, intValue) VALUES ('test1', 123);
 `);
 
         return dbTableCreate;
@@ -106,44 +121,9 @@ CREATE TABLE "users" ( "id" INTEGER, "avatar" TEXT, "email" TEXT, "home_page" TE
 
             case 1:
 
-                //console.log(`Create SQLite db ${this.dbName}`);
-                console.log(`Create SQLite: sqlLiteName`);
+                console.log(`Create SQLite db ${this.SPADatabaseName}`);
 
-                const db = this.createSQLLite(this.dbName);
-
-                console.log(`db isPromise ${util.types.isPromise(db)}`);
-
-                if (util.types.isPromise(db)) {
-
-                    db.then(dbBase => {
-
-                        const dbUsers = this.dbUsersCreated(dbBase);
-
-                        console.log(`dbUsers isPromise ${util.types.isPromise(dbUsers)}`);
-
-                        // if (util.types.isPromise(dbUsers)) {
-                        //
-                        //     this.dbUsersCreate(dbUsers).then(res => {
-                        //
-                        //         console.log(``)
-                        //
-                        //     })
-                        //
-                        // }
-
-                    })
-
-                }
-
-
-                // this.initTableDB(db).then(r => {
-                //
-                //     console.log(`initTableDB worked`);
-                //
-                //     this.dbStep = 2;
-                //
-                //     }
-                // );
+                const dbSQLLite = this.createSQLLite(this.SPADatabaseName);
 
                 this.dbStep = 2;
 
