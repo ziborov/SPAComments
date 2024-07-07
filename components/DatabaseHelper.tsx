@@ -10,19 +10,77 @@ export class DatabaseHelper {
 
     private SPADatabaseName: any;
 
-    private SQLLiteStep: any;
+    private openDatabaseStep: any;
 
     private db: any;
 
-    constructor (SPADatabaseName, SQLLiteStep) {
+    private dbStep: any;
+
+    private dbDir: any;
+
+    constructor (SPADatabaseName, openDatabaseStep) {
 
         this.SPADatabaseName = SPADatabaseName;
 
-        this.SQLLiteStep = SQLLiteStep;
+        this.openDatabaseStep = openDatabaseStep;
 
     }
 
+    async getDirInfo () {
 
+        let dirInfo = await FileSystem.getInfoAsync(this.dbDir);
+
+        return dirInfo;
+
+    }
+
+    async createDir () {
+
+        console.log(`Db directory doesn't exist, creating…`);
+
+        await FileSystem.makeDirectoryAsync(this.dbDir, { intermediates: true });
+
+    }
+
+    openDatabase(openDatabaseStep)  {
+
+        this.openDatabaseStep = openDatabaseStep;
+
+        switch (this.openDatabaseStep) {
+
+            case 0:
+
+                this.dbDir = FileSystem.cacheDirectory + 'db/';
+
+                console.log(`dbDir: ${this.dbDir}`);
+
+                let dirInfo = this.getDirInfo();
+
+                console.log(`dirInfo: ${dirInfo} `);
+
+                dirInfo.then(dirInfo => {
+
+                    if (!dirInfo.exists) {
+
+                        console.log("Gif directory doesn't exist, creating…");
+
+                        this.createDir().then(r => console.log(`create db dir result ${r}`));
+
+                    }
+
+                })
+
+                break;
+            
+            default:
+                
+                console.log(`Error! openDatabaseStep: ${this.openDatabaseStep}`);
+
+        }
+
+        return this.dbStep;
+
+    }
 
 
 

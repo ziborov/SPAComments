@@ -6,7 +6,9 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useEffect } from "react/index";
 import * as SQLite from 'expo-sqlite';
-import { openDatabase } from "@/components/DatabaseHelper";
+import { DatabaseHelper } from "@/components/DatabaseHelper";
+let db = null;
+let dbStep, dbPreviousStep = 0;
 
 
 export default function HomeScreen() {
@@ -14,6 +16,18 @@ export default function HomeScreen() {
     useEffect(() => {
 
         console.log(`Start App!`);
+
+        const interval = setInterval(() => {
+
+            dbStep = databaseHelper.openDatabase(dbStep);
+
+            console.log(`dbStep: ${dbStep}`);
+
+        }, 500);
+
+        const databaseHelper = new DatabaseHelper("SPAComments", dbStep);
+
+        //db = openDatabase
 
         //openDatabase(`@/db/SPAComments.sqlite`).then(r => console.log(`Database opened`));
 
