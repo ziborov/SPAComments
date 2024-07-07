@@ -25,23 +25,23 @@ export default function HomeScreen() {
 
         const interval = setInterval(() => {
 
-            dbStep = databaseHelper.openDatabase(dbStep);
+            if(dbStep < 2) {
 
-            console.log(`dbStep: ${dbStep}`);
+                dbStep = databaseHelper.openDatabase(dbStep);
 
-            if(dbStep !== dbPreviousStep) {
+                console.log(`dbStep: ${dbStep}`);
 
-                dbPreviousStep = dbStep;
+                if (dbStep !== dbPreviousStep) {
+
+                    dbPreviousStep = dbStep;
+
+                }
 
             }
 
         }, 1000);
 
         const databaseHelper = new DatabaseHelper(dbName);
-
-        //db = openDatabase
-
-        //openDatabase(`@/db/SPAComments.sqlite`).then(r => console.log(`Database opened`));
 
     });
 

@@ -59,33 +59,27 @@ PRAGMA journal_mode = WAL;
 CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY NOT NULL, avatar TEXT NOT NULL, user_name TEXT NOT NULL,  email TEXT NOT NULL,  home_page TEXT NOT NULL,  captcha TEXT NOT NULL,  text TEXT NOT NULL);
 INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUES (0, 'SPA01.png', 'Rum_8', 'Rum_8@gmail.com', 'https://www.linkedin.com/in/oleksandr-ziborov-10589192/', '12345', 'Everybody of us understood clear things: Eliminating external contradictions provides ample opportunities!' );
 INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUES (1, 'SPA02.png', 'Anonym', 'Anonym@gmail.com', 'https://www.linkedin.com/in/oleksandr-ziborov-10589192/', '67890', 'Suddenly, careful research of competitors, which represent a clear example of the continental European type of political culture, will be associatively distributed across industries.' );
+INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUES (2, 'SPA03.png', 'Oleks', 'oleksandrziborov@gmail.com', 'https://www.linkedin.com/in/oleksandr-ziborov-10589192/', '09876', 'Life is life.' );
 
 `);
 
+        // `getFirstAsync()` is useful when you want to get a single row from the database.
         const firstRow = await db.getFirstAsync('SELECT * FROM users');
 
-        console.log(`id: ${firstRow.id}, avatar: ${firstRow.avatar}, user_name: ${firstRow.user_name}`);
+        console.log(firstRow.id, firstRow.avatar, firstRow.user_name);
 
+        const allRows = await db.getAllAsync('SELECT * FROM users');
+
+        for (const row of allRows) {
+
+            console.log(`id: ${row.id}, avatar: ${row.avatar}, user_name: ${row.user_name}, email: ${row.email}, home_page: ${row.home_page}, captcha: ${row.captcha}, text: ${row.text}`);
+
+        }
 
         return db;
 
     }
 
-    async dbUsersCreated(dbTable) {
-
-        const dbTableCreate = await dbTable.execAsync(`
-CREATE TABLE users ( "id" INTEGER, "avatar" TEXT, "email" TEXT, "home_page" TEXT, "captcha" TEXT, "text" TEXT, PRIMARY KEY("id" AUTOINCREMENT) );
-INSERT INTO users (value, intValue) VALUES ('test1', 123);
-`);
-
-        return dbTableCreate;
-
-    }
-
-    async initTableDB(db) {
-
-
-    }
 
     openDatabase(openDatabaseStep) {
 
