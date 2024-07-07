@@ -38,7 +38,9 @@ export class DatabaseHelper {
 
         console.log(`Db directory doesn't exist, ${this.dbDir} creating… `);
 
-        await FileSystem.makeDirectoryAsync(this.dbDir, { intermediates: true });
+        const createdDbDirResult = await FileSystem.makeDirectoryAsync(this.dbDir, { intermediates: true });
+
+        return createdDbDirResult;
 
     }
 
@@ -74,17 +76,15 @@ export class DatabaseHelper {
 
                 break;
             
-            default:
-                
-                console.log(`Error! openDatabaseStep: ${this.openDatabaseStep}`);
+            // default:
+            //
+            //     console.log(`Error! openDatabaseStep: ${this.openDatabaseStep}`);
 
         }
 
         return this.dbStep;
 
     }
-
-
 
 
 }
