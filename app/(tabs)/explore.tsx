@@ -287,10 +287,12 @@ const styles = StyleSheet.create({
         width: 260,
         alignItems: 'center',
         backgroundColor: '#2196F3',
+
     },
     buttonText: {
         textAlign: 'center',
         padding: 20,
         color: 'white',
+        fontSize: 25
     },
 });
