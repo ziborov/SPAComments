@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     collapsible: {
         height: 40,
         backgroundColor: "#ffffff",
-        fontSize: 25
+        fontSize: 30
     },
     textInputs: {
         height: 40,

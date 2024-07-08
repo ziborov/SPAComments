@@ -8,12 +8,12 @@ import { useEffect } from "react/index";
 import * as SQLite from 'expo-sqlite';
 import { DatabaseHelper } from "@/components/DatabaseHelper";
 
+let dbStep : number = 0;
+
 
 export default function HomeScreen() {
 
     let db: any = null;
-
-    let dbStep : number = 0;
 
     let dbPreviousStep : number = 0;
 
