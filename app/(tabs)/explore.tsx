@@ -19,7 +19,12 @@ import {ThemedView} from '@/components/ThemedView';
 import {useState, useEffect} from "react";
 
 import * as SQLite from 'expo-sqlite';
+import {DatabaseHelper} from "@/components/DatabaseHelper";
+import { dbName } from "@/constants/DatabaseConst";
 
+let dbStep : number = 0;
+
+let dbPreviousStep : number = 0;
 
 export default function TabTwoScreen() {
 
@@ -51,6 +56,32 @@ export default function TabTwoScreen() {
 
     }
 
+
+    useEffect(() => {
+
+        console.log(`Start Explore!`);
+
+        const interval = setInterval(() => {
+
+            if(dbStep < 2) {
+
+                dbStep = databaseHelper.openDatabase(dbStep);
+
+                console.log(`dbStep: ${dbStep}`);
+
+                if (dbStep !== dbPreviousStep) {
+
+                    dbPreviousStep = dbStep;
+
+                }
+
+            }
+
+        }, 1000);
+
+        const databaseHelper = new DatabaseHelper(dbName);
+
+    });
 
     return (
 

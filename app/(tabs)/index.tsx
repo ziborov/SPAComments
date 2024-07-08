@@ -19,31 +19,31 @@ export default function HomeScreen() {
 
     const dbName: string = `spa_comments`;
 
-    useEffect(() => {
-
-        console.log(`Start App!`);
-
-        const interval = setInterval(() => {
-
-            if(dbStep < 2) {
-
-                dbStep = databaseHelper.openDatabase(dbStep);
-
-                console.log(`dbStep: ${dbStep}`);
-
-                if (dbStep !== dbPreviousStep) {
-
-                    dbPreviousStep = dbStep;
-
-                }
-
-            }
-
-        }, 1000);
-
-        const databaseHelper = new DatabaseHelper(dbName);
-
-    });
+    // useEffect(() => {
+    //
+    //     console.log(`Start App!`);
+    //
+    //     const interval = setInterval(() => {
+    //
+    //         if(dbStep < 2) {
+    //
+    //             dbStep = databaseHelper.openDatabase(dbStep);
+    //
+    //             console.log(`dbStep: ${dbStep}`);
+    //
+    //             if (dbStep !== dbPreviousStep) {
+    //
+    //                 dbPreviousStep = dbStep;
+    //
+    //             }
+    //
+    //         }
+    //
+    //     }, 1000);
+    //
+    //     const databaseHelper = new DatabaseHelper(dbName);
+    //
+    // });
 
 
     return (
