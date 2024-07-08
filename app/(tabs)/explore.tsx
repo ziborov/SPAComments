@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {StyleSheet, Image, Platform} from 'react-native';
+import {StyleSheet, Image, Platform, TextInput, Text, View} from 'react-native';
 
 import {Collapsible} from '@/components/Collapsible';
 import {ExternalLink} from '@/components/ExternalLink';
@@ -7,6 +7,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {useState, useEffect} from "react";
+
 import * as SQLite from 'expo-sqlite';
 
 export default function TabTwoScreen() {
@@ -16,6 +17,8 @@ export default function TabTwoScreen() {
     const [noteArr, setNoteArr] = useState([]);
 
     const [visible, setVisible] = useState(false);
+
+    const [textId, setTextId] = useState("");
 
     return (
 
@@ -37,6 +40,21 @@ export default function TabTwoScreen() {
                 <ThemedText type="title">Comments:</ThemedText>
 
             </ThemedView>
+
+            <Collapsible title="This text inputs will allow you to add new comments:">
+
+                    <View style={{padding: 10}}>
+
+                        <TextInput
+                            style={{height: 40}}
+                            placeholder="Input new id"
+                            onChangeText={newTextId => setTextId(newTextId)}
+                            defaultValue={textId}
+                        />
+
+                    </View>
+
+            </Collapsible>
 
             {/*<ThemedText>This app includes example code to help you get started.</ThemedText>*/}
             {/*<Collapsible title="File-based routing">*/}
@@ -107,8 +125,6 @@ export default function TabTwoScreen() {
             {/*        ),*/}
             {/*    })}*/}
             {/*</Collapsible>*/}
-
-
 
 
         </ParallaxScrollView>
