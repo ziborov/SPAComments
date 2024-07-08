@@ -167,7 +167,7 @@ export default function TabTwoScreen() {
 
                     <TouchableOpacity
 
-                        onPress={() => onPressCreateUser}
+                        onPress={onPressCreateUser}
 
                         >
 
