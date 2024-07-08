@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {StyleSheet, Image, Platform, TextInput, Text, View} from 'react-native';
+import {StyleSheet, Image, Platform, TextInput, Text, View, TouchableHighlight, Alert} from 'react-native';
 
 import {Collapsible} from '@/components/Collapsible';
 import {ExternalLink} from '@/components/ExternalLink';
@@ -10,6 +10,7 @@ import {useState, useEffect} from "react";
 
 import * as SQLite from 'expo-sqlite';
 
+
 export default function TabTwoScreen() {
 
     const [note, setNote] = useState("");
@@ -18,7 +19,31 @@ export default function TabTwoScreen() {
 
     const [visible, setVisible] = useState(false);
 
-    const [textId, setTextId] = useState("");
+    const [Id, setId] = useState("");
+
+    const [avatar, setAvatar] = useState("");
+
+    const [userName, setUserName] = useState("");
+
+    const [email, setEmail] = useState("");
+
+    const [homePage, setHomePage] = useState("");
+
+    const [captcha, setCaptcha] = useState("");
+
+    const [text, setText] = useState("");
+
+    function onPressCreateUsers() {
+
+
+
+    }
+
+    function onLongCreateUsers() {
+
+        Alert.alert('You long-pressed _onLongCreateUsers!');
+
+    }
 
     return (
 
@@ -41,18 +66,115 @@ export default function TabTwoScreen() {
 
             </ThemedView>
 
-            <Collapsible title="This text inputs will allow you to add new comments:">
+            <Collapsible style={styles.collapsible} title="This text inputs will allow you to add new users:">
 
-                    <View style={{padding: 10}}>
+                <View style={styles.textViewInputs}>
 
-                        <TextInput
-                            style={{height: 40}}
-                            placeholder="Input new id"
-                            onChangeText={newTextId => setTextId(newTextId)}
-                            defaultValue={textId}
-                        />
+                    <TextInput
+                        style={styles.textInputs}
+                        placeholder="Input new id"
+                        onChangeText={newTextId => setId(newTextId)}
+                        defaultValue={Id}
+                    />
 
-                    </View>
+                </View>
+
+                <View style={styles.textViewInputs}>
+
+                    <TextInput
+                        style={styles.textInputs}
+                        placeholder="Input new avatar"
+                        onChangeText={avatar => setAvatar(avatar)}
+                        defaultValue={avatar}
+                    />
+
+                </View>
+
+                <View style={styles.textViewInputs}>
+
+                    <TextInput
+                        style={styles.textInputs}
+                        placeholder="Input new user name"
+                        onChangeText={userName => setUserName(userName)}
+                        defaultValue={userName}
+                    />
+
+                </View>
+
+                <View style={styles.textViewInputs}>
+
+                    <TextInput
+                        style={styles.textInputs}
+                        placeholder="Input new email"
+                        onChangeText={userEmail => setEmail(userName)}
+                        defaultValue={userName}
+                    />
+
+                </View>
+
+                <View style={styles.textViewInputs}>
+
+                    <TextInput
+                        style={styles.textInputs}
+                        placeholder="Input new home page"
+                        onChangeText={userHomePage => setHomePage(userHomePage)}
+                        defaultValue={homePage}
+                    />
+
+                </View>
+
+                <View style={styles.textViewInputs}>
+
+                    <TextInput
+                        style={styles.textInputs}
+                        placeholder="Input new captcha"
+                        onChangeText={userCaptcha => setCaptcha(userCaptcha)}
+                        defaultValue={captcha}
+                    />
+
+                </View>
+
+                <View style={styles.textViewInputs}>
+
+                    <TextInput
+                        style={styles.textInputs}
+                        placeholder="Input new captcha"
+                        onChangeText={userCaptcha => setCaptcha(userCaptcha)}
+                        defaultValue={captcha}
+                    />
+
+                </View>
+
+                <View style={styles.textViewInputs}>
+
+                    <TextInput
+                        style={styles.textInputs}
+                        placeholder="Input new text"
+                        onChangeText={userText => setText(userText)}
+                        defaultValue={text}
+                    />
+
+                </View>
+
+                <View style={styles.textViewInputs}>
+
+                    <TouchableHighlight
+
+                        // onPress={event => this.onPressCreateUsers}
+                        //
+                        // onLongPress={this.onLongPressButton}
+
+                        underlayColor="white">
+
+                        <View style={styles.button}>
+
+                            <Text style={styles.buttonText}>Touch for user creating</Text>
+
+                        </View>
+
+                    </TouchableHighlight>
+
+                </View>
 
             </Collapsible>
 
@@ -132,12 +254,6 @@ export default function TabTwoScreen() {
 }
 
 const styles = StyleSheet.create({
-    headerImage: {
-        color: '#808080',
-        bottom: -90,
-        left: -35,
-        position: 'absolute',
-    },
     titleContainer: {
         flexDirection: 'row',
         gap: 8,
@@ -146,5 +262,35 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 8,
+    },
+    collapsible: {
+        height: 40,
+        backgroundColor: "#ffffff",
+        fontSize: 25
+    },
+    textInputs: {
+        height: 40,
+        backgroundColor: "#eeeeee",
+        fontSize: 23
+    },
+    textViewInputs: {
+        padding: 10,
+        margin: 10,
+        backgroundColor: "#eeeeee",
+    },
+    container: {
+        paddingTop: 60,
+        alignItems: 'center',
+    },
+    button: {
+        marginBottom: 30,
+        width: 260,
+        alignItems: 'center',
+        backgroundColor: '#2196F3',
+    },
+    buttonText: {
+        textAlign: 'center',
+        padding: 20,
+        color: 'white',
     },
 });
