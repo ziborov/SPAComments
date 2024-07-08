@@ -1,5 +1,15 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {StyleSheet, Image, Platform, TextInput, Text, View, TouchableHighlight, Alert} from 'react-native';
+import {
+    StyleSheet,
+    Image,
+    Platform,
+    TextInput,
+    Text,
+    View,
+    TouchableHighlight,
+    Alert,
+    TouchableOpacity
+} from 'react-native';
 
 import {Collapsible} from '@/components/Collapsible';
 import {ExternalLink} from '@/components/ExternalLink';
@@ -33,17 +43,14 @@ export default function TabTwoScreen() {
 
     const [text, setText] = useState("");
 
-    function onPressCreateUsers() {
+    const onPressCreateUser = () => {
 
+        Alert.alert('Create user');
 
-
-    }
-
-    function onLongCreateUsers() {
-
-        Alert.alert('You long-pressed _onLongCreateUsers!');
+        console.log('Create user');
 
     }
+
 
     return (
 
@@ -158,13 +165,11 @@ export default function TabTwoScreen() {
 
                 <View style={styles.textViewInputs}>
 
-                    <TouchableHighlight
+                    <TouchableOpacity
 
-                        // onPress={event => this.onPressCreateUsers}
-                        //
-                        // onLongPress={this.onLongPressButton}
+                        onPress={() => onPressCreateUser}
 
-                        underlayColor="white">
+                        >
 
                         <View style={styles.button}>
 
@@ -172,7 +177,7 @@ export default function TabTwoScreen() {
 
                         </View>
 
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
                 </View>
 
