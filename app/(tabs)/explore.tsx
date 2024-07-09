@@ -8,7 +8,7 @@ import {
     View,
     TouchableHighlight,
     Alert,
-    TouchableOpacity
+    TouchableOpacity, SafeAreaView, FlatList
 } from 'react-native';
 
 import {Collapsible} from '@/components/Collapsible';
@@ -120,209 +120,143 @@ export default function TabTwoScreen() {
 
     });
 
+    type ItemProps = {title: string};
+
+    const Item = ({title, avatar, user_name, email, home_page, captcha, text}: ItemProps) => (
+        <View style={styles.flexItem}>
+            <Text style={styles.flexTitle}>{title}</Text>
+            <Text style={styles.flexItem}>{avatar}</Text>
+            <Text style={styles.flexItem}>{user_name}</Text>
+            <Text style={styles.flexItem}>{email}</Text>
+            <Text style={styles.flexItem}>{home_page}</Text>
+            <Text style={styles.flexItem}>{captcha}</Text>
+            <Text style={styles.flexItem}>{text}</Text>
+        </View>
+    );
+
     return (
 
-        <ParallaxScrollView
+        <SafeAreaView style={styles.safeContainer}>
 
-            headerBackgroundColor={{light: '#D0D0D0', dark: '#353636'}}
+            {/*<ThemedView style={styles.titleContainer}>*/}
 
-            headerImage={
+            {/*    <ThemedText type="title">Comments:</ThemedText>*/}
 
-                <Image
-                    source={require('@/assets/images/SPA02.png')}
-                    style={styles.headLogo}
+            {/*</ThemedView>*/}
+
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TextInput*/}
+            {/*            style={styles.textInputs}*/}
+            {/*            placeholder="Input new id"*/}
+            {/*            onChangeText={newTextId => setId(newTextId)}*/}
+            {/*            defaultValue={Id}*/}
+            {/*        />*/}
+
+            {/*    </View>*/}
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TextInput*/}
+            {/*            style={styles.textInputs}*/}
+            {/*            placeholder="Input new avatar"*/}
+            {/*            onChangeText={avatar => setAvatar(avatar)}*/}
+            {/*            defaultValue={avatar}*/}
+            {/*        />*/}
+
+            {/*    </View>*/}
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TextInput*/}
+            {/*            style={styles.textInputs}*/}
+            {/*            placeholder="Input new user name"*/}
+            {/*            onChangeText={userName => setUserName(userName)}*/}
+            {/*            defaultValue={userName}*/}
+            {/*        />*/}
+
+            {/*    </View>*/}
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TextInput*/}
+            {/*            style={styles.textInputs}*/}
+            {/*            placeholder="Input new email"*/}
+            {/*            onChangeText={userEmail => setEmail(userName)}*/}
+            {/*            defaultValue={userName}*/}
+            {/*        />*/}
+
+            {/*    </View>*/}
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TextInput*/}
+            {/*            style={styles.textInputs}*/}
+            {/*            placeholder="Input new home page"*/}
+            {/*            onChangeText={userHomePage => setHomePage(userHomePage)}*/}
+            {/*            defaultValue={homePage}*/}
+            {/*        />*/}
+
+            {/*    </View>*/}
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TextInput*/}
+            {/*            style={styles.textInputs}*/}
+            {/*            placeholder="Input new captcha"*/}
+            {/*            onChangeText={userCaptcha => setCaptcha(userCaptcha)}*/}
+            {/*            defaultValue={captcha}*/}
+            {/*        />*/}
+
+            {/*    </View>*/}
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TextInput*/}
+            {/*            style={styles.textInputs}*/}
+            {/*            placeholder="Input new captcha"*/}
+            {/*            onChangeText={userCaptcha => setCaptcha(userCaptcha)}*/}
+            {/*            defaultValue={captcha}*/}
+            {/*        />*/}
+
+            {/*    </View>*/}
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TextInput*/}
+            {/*            style={styles.textInputs}*/}
+            {/*            placeholder="Input new text"*/}
+            {/*            onChangeText={userText => setText(userText)}*/}
+            {/*            defaultValue={text}*/}
+            {/*        />*/}
+
+            {/*    </View>*/}
+
+            {/*    <View style={styles.textViewInputs}>*/}
+
+            {/*        <TouchableOpacity*/}
+
+            {/*            onPress={onPressCreateUser}*/}
+
+            {/*            >*/}
+
+            {/*            <View style={styles.button}>*/}
+
+            {/*                <Text style={styles.buttonText}>Touch for user creating</Text>*/}
+
+            {/*            </View>*/}
+
+            {/*        </TouchableOpacity>*/}
+
+            {/*    </View>*/}
+
+                <FlatList
+                    data={rows}
+                    renderItem={({item}) => <Item title={item.id.toString()} avatar={item.avatar} user_name={item.user_name} email={item.email} home_page={item.home_page} captcha={item.captcha} text={item.text} />}
+                    keyExtractor={item => item.id}
                 />
-
-            }>
-
-            <ThemedView style={styles.titleContainer}>
-
-                <ThemedText type="title">Comments:</ThemedText>
-
-            </ThemedView>
-
-            <Collapsible style={styles.collapsible} title="This text inputs will allow you to add new users:">
-
-                <View style={styles.textViewInputs}>
-
-                    <TextInput
-                        style={styles.textInputs}
-                        placeholder="Input new id"
-                        onChangeText={newTextId => setId(newTextId)}
-                        defaultValue={Id}
-                    />
-
-                </View>
-
-                <View style={styles.textViewInputs}>
-
-                    <TextInput
-                        style={styles.textInputs}
-                        placeholder="Input new avatar"
-                        onChangeText={avatar => setAvatar(avatar)}
-                        defaultValue={avatar}
-                    />
-
-                </View>
-
-                <View style={styles.textViewInputs}>
-
-                    <TextInput
-                        style={styles.textInputs}
-                        placeholder="Input new user name"
-                        onChangeText={userName => setUserName(userName)}
-                        defaultValue={userName}
-                    />
-
-                </View>
-
-                <View style={styles.textViewInputs}>
-
-                    <TextInput
-                        style={styles.textInputs}
-                        placeholder="Input new email"
-                        onChangeText={userEmail => setEmail(userName)}
-                        defaultValue={userName}
-                    />
-
-                </View>
-
-                <View style={styles.textViewInputs}>
-
-                    <TextInput
-                        style={styles.textInputs}
-                        placeholder="Input new home page"
-                        onChangeText={userHomePage => setHomePage(userHomePage)}
-                        defaultValue={homePage}
-                    />
-
-                </View>
-
-                <View style={styles.textViewInputs}>
-
-                    <TextInput
-                        style={styles.textInputs}
-                        placeholder="Input new captcha"
-                        onChangeText={userCaptcha => setCaptcha(userCaptcha)}
-                        defaultValue={captcha}
-                    />
-
-                </View>
-
-                <View style={styles.textViewInputs}>
-
-                    <TextInput
-                        style={styles.textInputs}
-                        placeholder="Input new captcha"
-                        onChangeText={userCaptcha => setCaptcha(userCaptcha)}
-                        defaultValue={captcha}
-                    />
-
-                </View>
-
-                <View style={styles.textViewInputs}>
-
-                    <TextInput
-                        style={styles.textInputs}
-                        placeholder="Input new text"
-                        onChangeText={userText => setText(userText)}
-                        defaultValue={text}
-                    />
-
-                </View>
-
-                <View style={styles.textViewInputs}>
-
-                    <TouchableOpacity
-
-                        onPress={onPressCreateUser}
-
-                        >
-
-                        <View style={styles.button}>
-
-                            <Text style={styles.buttonText}>Touch for user creating</Text>
-
-                        </View>
-
-                    </TouchableOpacity>
-
-                </View>
-
-            </Collapsible>
-
-            {/*<ThemedText>This app includes example code to help you get started.</ThemedText>*/}
-            {/*<Collapsible title="File-based routing">*/}
-            {/*    <ThemedText>*/}
-            {/*        This app has two screens:{' '}*/}
-            {/*        <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}*/}
-            {/*        <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>*/}
-            {/*    </ThemedText>*/}
-            {/*    <ThemedText>*/}
-            {/*        The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}*/}
-            {/*        sets up the tab navigator.*/}
-            {/*    </ThemedText>*/}
-            {/*    <ExternalLink href="https://docs.expo.dev/router/introduction">*/}
-            {/*        <ThemedText type="link">Learn more</ThemedText>*/}
-            {/*    </ExternalLink>*/}
-            {/*</Collapsible>*/}
-            {/*<Collapsible title="Android, iOS, and web support">*/}
-            {/*    <ThemedText>*/}
-            {/*        You can open this project on Android, iOS, and the web. To open the web version, press{' '}*/}
-            {/*        <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.*/}
-            {/*    </ThemedText>*/}
-            {/*</Collapsible>*/}
-            {/*<Collapsible title="Images">*/}
-            {/*    <ThemedText>*/}
-            {/*        For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}*/}
-            {/*        <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for*/}
-            {/*        different screen densities*/}
-            {/*    </ThemedText>*/}
-            {/*    <Image source={require('@/assets/images/react-logo.png')} style={{alignSelf: 'center'}}/>*/}
-            {/*    <ExternalLink href="https://reactnative.dev/docs/images">*/}
-            {/*        <ThemedText type="link">Learn more</ThemedText>*/}
-            {/*    </ExternalLink>*/}
-            {/*</Collapsible>*/}
-            {/*<Collapsible title="Custom fonts">*/}
-            {/*    <ThemedText>*/}
-            {/*        Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}*/}
-            {/*        <ThemedText style={{fontFamily: 'SpaceMono'}}>*/}
-            {/*            custom fonts such as this one.*/}
-            {/*        </ThemedText>*/}
-            {/*    </ThemedText>*/}
-            {/*    <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">*/}
-            {/*        <ThemedText type="link">Learn more</ThemedText>*/}
-            {/*    </ExternalLink>*/}
-            {/*</Collapsible>*/}
-            {/*<Collapsible title="Light and dark mode components">*/}
-            {/*    <ThemedText>*/}
-            {/*        This template has light and dark mode support. The{' '}*/}
-            {/*        <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect*/}
-            {/*        what the user's current color scheme is, and so you can adjust UI colors accordingly.*/}
-            {/*    </ThemedText>*/}
-            {/*    <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">*/}
-            {/*        <ThemedText type="link">Learn more</ThemedText>*/}
-            {/*    </ExternalLink>*/}
-            {/*</Collapsible>*/}
-            {/*<Collapsible title="Animations">*/}
-            {/*    <ThemedText>*/}
-            {/*        This template includes an example of an animated component. The{' '}*/}
-            {/*        <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses*/}
-            {/*        the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library*/}
-            {/*        to create a waving hand animation.*/}
-            {/*    </ThemedText>*/}
-            {/*    {Platform.select({*/}
-            {/*        ios: (*/}
-            {/*            <ThemedText>*/}
-            {/*                The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}*/}
-            {/*                component provides a parallax effect for the header image.*/}
-            {/*            </ThemedText>*/}
-            {/*        ),*/}
-            {/*    })}*/}
-            {/*</Collapsible>*/}
-
-
-        </ParallaxScrollView>
+            </SafeAreaView>
     );
 }
 
@@ -368,4 +302,20 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 25
     },
+    safeContainer: {
+        flex: 1,
+        marginTop: 0,
+    },
+    flexItem: {
+        backgroundColor: '#caffc2',
+        padding: 10,
+        marginVertical: 3,
+        marginHorizontal: 3,
+    },
+    flexTitle: {
+        fontSize: 25,
+    },
+    flexRow: {
+        fontSize: 20,
+    }
 });
