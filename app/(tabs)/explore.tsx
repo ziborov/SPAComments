@@ -84,7 +84,7 @@ export default function TabTwoScreen() {
 
                     console.log(`newRows.length ${newRows.length}`);
 
-                    setRows(await newRows);
+                    setRows(newRows);
 
                 }
 
