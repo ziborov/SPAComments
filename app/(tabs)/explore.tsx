@@ -48,6 +48,8 @@ export default function TabTwoScreen() {
 
     const [text, setText] = useState("");
 
+    const [rows, setRows] = useState([]);
+
     const onPressCreateUser = () => {
 
         Alert.alert('Create user');
@@ -57,13 +59,42 @@ export default function TabTwoScreen() {
     }
 
 
+
     useEffect(() => {
+
+        const databaseHelper = new DatabaseHelper(dbName);
 
         console.log(`Start Explore!`);
 
-        const interval = setInterval(() => {
+        this.getRowsResults = () => {
 
-            if(dbStep < 2) {
+            return databaseHelper.getRows();
+
+        }
+
+        const interval = setInterval(async () => {
+
+            if (dbStep === 2) {
+
+                console.log(`newRows`);
+
+                const newRows = await databaseHelper.getRows();
+
+                if (newRows !== undefined && newRows !== null && Array.isArray(newRows) && newRows.length > 0) {
+
+                    console.log(`newRows.length ${newRows.length}`);
+
+                    setRows(await newRows);
+
+                }
+
+
+
+                dbStep = 3;
+
+            }
+
+            if (dbStep < 2) {
 
                 dbStep = databaseHelper.openDatabase(dbStep);
 
@@ -77,9 +108,9 @@ export default function TabTwoScreen() {
 
             }
 
-        }, 1000);
 
-        const databaseHelper = new DatabaseHelper(dbName);
+
+        }, 5000);
 
     });
 
