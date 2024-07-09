@@ -84,6 +84,12 @@ export default function TabTwoScreen() {
 
                     console.log(`newRows.length ${newRows.length}`);
 
+                    for (const row of newRows) {
+
+                        console.log(`In Explore id: ${row.id}, avatar: ${row.avatar}, user_name: ${row.user_name}, email: ${row.email}, home_page: ${row.home_page}, captcha: ${row.captcha}, text: ${row.text}`);
+
+                    }
+
                     setRows(newRows);
 
                 }
