@@ -18,6 +18,8 @@ export class DatabaseHelper {
 
     private db : any;
 
+    private rows : any;
+
     constructor(SPADatabaseName) {
 
         this.SPADatabaseName = SPADatabaseName;
@@ -67,15 +69,19 @@ INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUE
 
         console.log(firstRow.id, firstRow.avatar, firstRow.user_name, firstRow.email, firstRow.home_page, firstRow.captcha, firstRow.text);
 
-        const allRows = await this.db.getAllAsync('SELECT * FROM users');
+        this.rows = await this.db.getAllAsync('SELECT * FROM users');
 
-        for (const row of allRows) {
+        for (const row of this.rows) {
 
             console.log(`id: ${row.id}, avatar: ${row.avatar}, user_name: ${row.user_name}, email: ${row.email}, home_page: ${row.home_page}, captcha: ${row.captcha}, text: ${row.text}`);
 
         }
 
-        //return this.db;
+    }
+
+    async getRows() {
+
+        return this.rows;
 
     }
 
