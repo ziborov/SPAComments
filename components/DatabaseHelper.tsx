@@ -55,10 +55,12 @@ export class DatabaseHelper {
         await this.db.execAsync(`
 PRAGMA journal_mode = WAL;
 CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY NOT NULL, avatar TEXT NOT NULL, user_name TEXT NOT NULL,  email TEXT NOT NULL,  home_page TEXT NOT NULL,  captcha TEXT NOT NULL,  text TEXT NOT NULL);
+`);
+
+        await this.db.execAsync(`
 INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUES (0, 'user01.png', 'Rum_8', 'Rum_8@gmail.com', 'https://www.linkedin.com/in/oleksandr-ziborov-10589192/', '12345', 'Everybody of us understood clear things: Eliminating external contradictions provides ample opportunities!' );
 INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUES (1, 'user02.png', 'Anonym', 'Anonym@gmail.com', 'https://www.linkedin.com/in/oleksandr-ziborov-10589192/', '67890', 'Suddenly, careful research of competitors, which represent a clear example of the continental European type of political culture, will be associatively distributed across industries.' );
 INSERT INTO users (id, avatar, user_name, email, home_page, captcha, text) VALUES (2, 'user03.png', 'Oleks', 'oleksandrziborov@gmail.com', 'https://www.linkedin.com/in/oleksandr-ziborov-10589192/', '09876', 'Life is life.' );
-
 `);
 
         const firstRow = await this.db.getFirstAsync('SELECT * FROM users');

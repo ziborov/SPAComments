@@ -51,7 +51,7 @@ export default function HomeScreen() {
             headerBackgroundColor={{light: '#A1CEDC', dark: '#1D3D47'}}
             headerImage={
                 <Image
-                    source={require('@/assets/images/SPA01.png')}
+                    source={require('@/assets/images/SPA02.png')}
                     style={styles.headLogo}
                 />
             }>
